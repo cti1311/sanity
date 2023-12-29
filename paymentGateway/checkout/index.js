@@ -1,8 +1,11 @@
-const testResult = require("../../utils/testResult");
-const { chromium, expect, errors } = require("playwright");
+const upiGen = require("./upi");
+const cashGen = require("./cash");
 
-const upiGen = require("./upi")
-
-module.exports = (page, mode, bankcode) => {
-  return upiGen
+module.exports = (mode) => {
+  switch (mode) {
+    case "UPI":
+      return upiGen;
+    case "CASH":
+      return cashGen;
+  }
 };
