@@ -81,7 +81,7 @@ async function a(testData, mode) {
 async function startTest(url, {mode, flow, bankcode} ) {
   
   const browser = await chromium.launch({
-    headless: true,
+    headless: false,
   });
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -113,7 +113,7 @@ async function startTest(url, {mode, flow, bankcode} ) {
   for (let mode of args.slice(1)) {
     switch (mode) {
       case "cash":
-        tests.push(a(cashData, "CASH")); //.then((res) => console.log(res)))
+        tests.push(a(cashData, "CASH").then((res) => console.log(res)));
         break;
       case "nb":
         tests.push(a(nbData, "NB").then((res) => console.log(res)))
@@ -129,6 +129,6 @@ async function startTest(url, {mode, flow, bankcode} ) {
       tests = [];
     }
   }
-  
+
   console.log(Date.now() - time);
 })();
