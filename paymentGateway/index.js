@@ -8,10 +8,10 @@ module.exports = async (page, mode, context, flow, bankcode) => {
   let result = testResult();
 
   result.startTimer();
-
+  console.log(mode)
   if (flow=="nonseamless") {
-    let gen = checkout(page, mode, bankcode)
-    let nee = gen(page)
+    let gen = checkout(mode)
+    let nee = gen(page, bankcode)
 
     for await (let itr of nee) {
       result.addStep(...itr);
@@ -20,7 +20,7 @@ module.exports = async (page, mode, context, flow, bankcode) => {
   let pgGen;
   switch (mode) {
     case "CASH":
-      pgGen = checkout();
+      pgGen = cashPG();
       break;
     case "NB":
       pgGen = nbPG();
@@ -35,6 +35,6 @@ module.exports = async (page, mode, context, flow, bankcode) => {
   }
 
   result.stopTimer();
-  
+
   return result;
 };
