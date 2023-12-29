@@ -3,26 +3,16 @@ const testResult = require("../../utils/testResult");
 const PG_URL = "https://pgsim01.payu.in/initiate";
 const SIM_URL = "https://pgsim01.payu.in/authenticateCard";
 
-module.exports = async (page) => {
-  let result = testResult();
-  // Cleanup function
-  function CleanUpAndReturn() {
-    result.stopTimer();
-    return result;
-  }
-
-  // start the timer
-  result.startTimer();
-
+module.exports = async function* (page) {
   // PG page load
   try {
     await page.waitForURL(PG_URL, {
       timeout: 3000,
     });
-    result.addStep("PG page loaded", true);
+    yield ["PG page loaded", true, ""]
   } catch (e) {
-    result.addStep("PG page loaded", false, String(e));
-    return CleanUpAndReturn();
+    yield ["PG page loaded", false, String(e)]
+    return;
   }
 
   // OTP submission
@@ -33,10 +23,10 @@ module.exports = async (page) => {
     await page.locator('//*[@id="submit"]').click({
       timeout: 1000,
     });
-    result.addStep("OTP submitted", true, "");
+    yield ["OTP submitted", true, ""]
   } catch (e) {
-    result.addStep("OTP submitted", false, String(e));
-    return CleanUpAndReturn();
+    yield ["OTP submitted", false, String(e)];
+    return;
   }
 
   // Simulator page load
@@ -44,10 +34,10 @@ module.exports = async (page) => {
     await page.waitForURL(SIM_URL, {
       timeout: 3000,
     });
-    result.addStep("Simulator page loaded", true);
+    yield ["Simulator page loaded", true, ""]
   } catch (e) {
-    result.addStep("Simulator page loaded", false, String(e));
-    return CleanUpAndReturn();
+    yield ["Simulator page loaded", false, String(e)];
+    return;
   }
 
   // Simulate success response
@@ -59,11 +49,9 @@ module.exports = async (page) => {
       .click({
         timeout: 3000,
       });
-    result.addStep("Simulated success response", true, "");
+    yield ["Simulated success response", true, ""]
   } catch (e) {
-    result.addStep("Simulated success response", false, String(e));
-    return CleanUpAndReturn();
+    yield ["Simulated success response", false, String(e)];
+    return;
   }
-
-  return CleanUpAndReturn();
 };

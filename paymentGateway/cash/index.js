@@ -1,5 +1,5 @@
 const testpg = require('./testpg')
 
-module.exports = async (page)=>{
-  return testpg(page)
+module.exports = ()=>{
+  return testpg
 }
