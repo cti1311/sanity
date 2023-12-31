@@ -17,7 +17,8 @@ module.exports = async (page, mode, context, flow, bankcode) => {
       result.addStep(...itr);
     }
   }
-  let pgGen;
+  if (!result.getResult().status) return result;
+  
   switch (mode) {
     case "CASH":
       pgGen = cashPG();
