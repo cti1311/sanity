@@ -14,9 +14,13 @@ router.get("/initiate",(req,res)=>{
     phone: req.query.phone || "9999999999",
     surl: req.query.surl || `http://localhost:${process.env.PORT}/payment/response`,
     furl: req.query.furl || `http://localhost:${process.env.PORT}/payment/response`,
-    pg: req.query.pg || "",
-    bankcode: req.query.bankcode || "",
-    vpa: req.query.vpa || ""
+  }
+
+  console.log( typeof req.query)
+  for(let param in req.query){
+    if (!data[param]){
+      data[param] = req.query[param];
+    }
   }
   res.send(payuClient.paymentInitiate(data))
 })

@@ -6,6 +6,8 @@ const cashData = require("./testData/cashData");
 const nbData = require("./testData/nbData");
 const upiData = require("./testData/upiData");
 
+const ccData = require("./testData/ccData");
+
 const pg = require("./paymentGateway/index");
 
 const testResult = require('./utils/testResult')
@@ -112,6 +114,9 @@ async function startTest(url, {mode, flow, bankcode} ) {
   let tests = [];
   for (let mode of args.slice(1)) {
     switch (mode) {
+      case "cc":
+        tests.push(a(ccData, "CC").then((res) => console.log(res)));
+        break;
       case "cash":
         tests.push(a(cashData, "CASH").then((res) => console.log(res)));
         break;
