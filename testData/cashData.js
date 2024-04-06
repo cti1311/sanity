@@ -1,7 +1,7 @@
 module.exports = {
   nonseamless: [
     {
-      bankcode: "AMON",
+      testName: "AMON",
       payload: {
       },
       response: {

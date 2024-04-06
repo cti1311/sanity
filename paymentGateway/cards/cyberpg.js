@@ -17,11 +17,11 @@ module.exports = async function* (page,context) {
 
   // OTP submission
   try {
-    await page.locator('//*[@id="password"]').fill("123456", {
+    await page.locator('#password').fill("123456", {
       timeout: 1000,
     });
-    await page.locator('//*[@id="submitBtn"]').click({
-      timeout: 1000,
+    await page.getByRole('button', { name: 'PAY' }).click({
+      timeout: 5000,
     });
     yield ["OTP submitted", true, ""]
   } catch (e) {

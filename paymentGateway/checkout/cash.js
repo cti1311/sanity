@@ -1,9 +1,8 @@
 const { page } = require("playwright");
 
 const PG_URL = "https://apitest.payu.in/public/#/*";
-const SIM_URL = "https://pgsim01.payu.in/UPI-test-transaction/confirm/*";
 
-module.exports =  async function* (page, bankcode) {
+module.exports =  async function* ({page, bankcode}) {
   try {
     await page.waitForURL(PG_URL, {
       timeout: 10000,

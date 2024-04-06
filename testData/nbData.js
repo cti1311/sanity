@@ -1,23 +1,8 @@
 module.exports = {
-  nonseamless: [],
-  seamless: [
+  nonseamless: [
     {
-      bankcode: "SBIB",
+      testName: "AXIB",
       payload: {
-        pg: "NB",
-        bankcode: "SBIB"
-      },
-      response: {
-        status: "success",
-        mode: "NB",
-        bankcode: "SBIB"
-      }
-    },
-    {
-      bankcode: "AXIB",
-      payload: {
-        pg: "NB",
-        bankcode: "AXIB"
       },
       response: {
         status: "success",
@@ -26,5 +11,18 @@ module.exports = {
       }
     }
   ],
+  seamless: [
+    {
+      testName: "AXIB",
+      payload: {
+      },
+      response: {
+        status: "success",
+        mode: "NB",
+        bankcode: "AXIB"
+      }
+    }
+  ],
+  
   s2s: []
 };

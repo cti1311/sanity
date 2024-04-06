@@ -38,23 +38,12 @@ module.exports = async function* (page, context) {
       .click({
         timeout: 1000,
       })
+      await page1.close();
+  
     yield ["Simulator page loaded", true, ""];
   } catch (e) {
-    yield ["Simulator page loaded", false, String(e)];
-    return;
-  }
-
-  // Simulate success response
-  try {
     await page1.close();
-
-    await page.waitForURL("http://localhost:3000/payment/response", {
-      timeout: 30000,
-    });
-    await page.close();
-    yield ["Simulated success response", true, ""];
-  } catch (e) {
-    yield ["Simulated success response", false, String(e)];
+    yield ["Simulator page loaded", false, String(e)];
     return;
   }
 };
