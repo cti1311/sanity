@@ -1,8 +1,8 @@
 const payu = require('payu-websdk')
 
 const payuClient = new payu({
-  key: "QyT13U",
-  salt: "UnJ0FGO0kt3dUgnHo9Xgwi0lpipBV0hB",
+  key: "gtKFFx",
+  salt: "4R38IvwiV57FwVpsgOvTXBdLE4tHUXFW",
 },"TEST"); 
 
 module.exports = payuClient

@@ -1,7 +1,7 @@
 module.exports = {
   nonseamless: [
     {
-      testName: "UPI",
+      testName: "UPI - 999999999@upi",
       payload: {
         payload: "999999999@upi"
       },
@@ -14,7 +14,7 @@ module.exports = {
   ],
   seamless: [
     {
-      testName: "UPI",
+      testName: "UPI - 999999999@upi",
       payload: {
         pg: "UPI",
         bankcode: "UPI",

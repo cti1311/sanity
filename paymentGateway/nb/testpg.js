@@ -23,11 +23,11 @@ module.exports = async function* (page, context) {
     await page.getByPlaceholder('Enter payu as password').fill('payu',{
       timeout: 1000,
     });
-    // console.log(await page.getByPlaceholder('Enter payu as username').inputValue());
-    // console.log(await page.getByPlaceholder('Enter payu as password').inputValue());
-    // await new Promise(res=>(setTimeout((res)=>{console.log("sddf")},10000)))
-    // page.on('request', request => console.log('>>', request.method(), request.url(), request.postData()));
-// page.on('response', response => console.log('<<', response.status(), response.url(), response.body().then((res=>console.log(res)))));
+    // // console.log(await page.getByPlaceholder('Enter payu as username').inputValue());
+    // // console.log(await page.getByPlaceholder('Enter payu as password').inputValue());
+    // await new Promise(res=>(setTimeout((res)=>{// console.log("sddf")},10000)))
+    // page.on('request', request => // console.log('>>', request.method(), request.url(), request.postData()));
+// page.on('response', response => // console.log('<<', response.status(), response.url(), response.body().then((res=>// console.log(res)))));
     await page.getByRole('button', { name: 'Submit' }).click({
       timeout: 3000,
     });

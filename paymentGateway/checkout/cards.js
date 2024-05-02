@@ -43,6 +43,7 @@ module.exports =  async function* ({page, bankcode, payload}) {
   }
 
   try {
+    // await new Promise(res => {setTimeout(()=>{// console.log("timeout")},10000)})
     await page.getByRole('button', { name: 'PROCEED' }).click({
       timeout: 5000,
     });

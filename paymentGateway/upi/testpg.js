@@ -33,11 +33,13 @@ module.exports = async function* (page, context) {
       .click({
         timeout: 1000,
       })
+      // await new Promise(res => {setTimeout(()=>{// console.log("timeout")},10000)})
     await page1
       .locator('//*[@id="upiPopupBtn"]')
       .click({
         timeout: 1000,
       })
+      // await new Promise(res => {setTimeout(()=>{// console.log("timeout")},10000)})
       await page1.close();
   
     yield ["Simulator page loaded", true, ""];

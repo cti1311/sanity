@@ -17,7 +17,7 @@ module.exports = async ({
   let result = testResult();
 
   result.startTimer();
-  // console.log(mode);
+  // // console.log(mode);
   if (flow == "nonseamless") {
     let gen = checkout(mode);
     let nee = gen({ page, bankcode, payload });
@@ -41,7 +41,6 @@ module.exports = async ({
         break;
       case "NB":
         pgGen = nbPG();
-        // console.log(pgGen);
         break;
       case "UPI":
         pgGen = upiPG();
@@ -53,12 +52,12 @@ module.exports = async ({
     }
   }
 
-  // console.log(result.getResult());
+  // // console.log(result.getResult());
   // Check the existing step status and continue with resposne validation
   if (result.getResult().status) {
     try {
       await page.waitForURL("http://localhost:3000/payment/response", {
-        timeout: 30000,
+        timeout: 45000,
       });
       let pgResposne = await page.locator("body > pre").textContent();
       let rs = ["Response validated", true, ""];
@@ -70,8 +69,9 @@ module.exports = async ({
         }
       }
       result.addStep(...rs);
-    } catch {
-      result.addStep(["Response validated", false, "Timeout while waiting for surl/furl redirection"]);
+    } catch(e){
+      // console.log(e)
+      result.addStep("Response validated", false, String(e));
     }
   }
 

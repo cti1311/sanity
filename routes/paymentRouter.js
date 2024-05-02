@@ -4,7 +4,7 @@ const router = require('express').Router()
 const payuClient = require('../payu')
 
 router.get("/initiate",(req,res)=>{
-  // console.log(req.query)
+  // // console.log(req.query)
   let data = {
     txnid: Math.floor(Math.random()*1000000000),
     amount: req.query.amount || 10.00,
@@ -16,7 +16,7 @@ router.get("/initiate",(req,res)=>{
     furl: req.query.furl || `http://localhost:${process.env.PORT}/payment/response`,
   }
 
-  // console.log( typeof req.query)
+  // // console.log( typeof req.query)
   for(let param in req.query){
     if (!data[param]){
       data[param] = req.query[param];
@@ -26,7 +26,7 @@ router.get("/initiate",(req,res)=>{
 })
 
 router.post("/response",(res,req)=>{
-  // console.log([req.body])
+  // // console.log([req.body])
   req.send(res.body)
 })
 

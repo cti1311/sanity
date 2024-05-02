@@ -15,6 +15,8 @@ module.exports = {
     {
       testName: "AXIB",
       payload: {
+        pg: "NB",
+        bankcode: "AXIB"
       },
       response: {
         status: "success",

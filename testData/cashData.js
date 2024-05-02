@@ -11,5 +11,19 @@ module.exports = {
       },
     }
   ],
+  seamless: [
+    {
+      testName: "AMON",
+      payload: {
+        pg: "CASH",
+        bankcode: "AMON"
+      },
+      response: {
+        status: "success",
+        mode: "CASH",
+        bankcode: "AMON",
+      },
+    }
+  ],
   s2s: [],
 };
