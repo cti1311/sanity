@@ -1,22 +1,41 @@
-let runner = require("./testFlow");
+#! /usr/bin/env node
 
-const cashData = require("./testData/cashData");
-const nbData = require("./testData/nbData");
-const upiData = require("./testData/upiData");
-const ccData = require("./testData/ccData");
-const dcData = require("./testData/dcData");
+let runner = require("../testFlow");
 
-let chalk = require('chalk');
+const cashData = require("../testData/cashData");
+const nbData = require("../testData/nbData");
+const upiData = require("../testData/upiData");
+const ccData = require("../testData/ccData");
+const dcData = require("../testData/dcData");
+
+let chalk = require("chalk");
 const cliProgress = require("cli-progress");
 const colors = require("ansi-colors");
 // create a new progress bar instance and use shades_classic theme
-var Table = require('cli-table');
-(async () => {
-  let args = process.argv.slice(2);
+var Table = require("cli-table");
 
+require("dotenv").config();
+
+const express = require("express");
+const app = express();
+
+app.use(express.urlencoded({ extended: false }));
+
+app.use("/", require("../routes/index"));
+
+(async () => {
+  let server;
+  await new Promise((res) => {
+    server = app.listen(process.env.PORT, () => {
+      console.log("Local server started!!!");
+      res();
+      return this
+    });
+  });
+  let args = process.argv.slice(2);
   if (args.length == 0) throw new Error("No argument found");
 
-  let concurrency = args[0];
+  let concurrency = 10;
 
   let time = Date.now();
 
@@ -30,9 +49,9 @@ var Table = require('cli-table');
   });
 
   // start the progress bar with a total value of 200 and start value of 0
-  bar1.start(args.slice(1).length, 0);
+  bar1.start(args.length, 0);
 
-  for (let mode of args.slice(1)) {
+  for (let mode of args) {
     switch (mode) {
       case "cc":
         tests.push(
@@ -85,6 +104,11 @@ var Table = require('cli-table');
   await Promise.all(tests);
 
   bar1.stop();
+  try{
+    await server.close()
+  }catch{
+
+  }
   // console.log("Total time taken: " + String(Date.now() - time) + "ms");
   let tables = [];
   for (test of results) {
@@ -101,18 +125,30 @@ var Table = require('cli-table');
     ]);
   }
 
-
-// instantiate
-var table = new Table({
-    head: ['Mode', 'Status', 'Test passed', 'Duration (ms)'],
-    chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
-           , 'bottom': '═' , 'bottom-mid': '╧' , 'bottom-left': '╚' , 'bottom-right': '╝'
-           , 'left': '║' , 'left-mid': '╟' , 'mid': '─' , 'mid-mid': '┼'
-           , 'right': '║' , 'right-mid': '╢' , 'middle': '│' }
+  // instantiate
+  var table = new Table({
+    head: ["Mode", "Status", "Test passed", "Duration (ms)"],
+    chars: {
+      top: "═",
+      "top-mid": "╤",
+      "top-left": "╔",
+      "top-right": "╗",
+      bottom: "═",
+      "bottom-mid": "╧",
+      "bottom-left": "╚",
+      "bottom-right": "╝",
+      left: "║",
+      "left-mid": "╟",
+      mid: "─",
+      "mid-mid": "┼",
+      right: "║",
+      "right-mid": "╢",
+      middle: "│",
+    },
   });
-  
+
   table.push(...tables);
-  
+
   console.log(table.toString());
-  console.log(JSON.stringify(results))
+  console.log(JSON.stringify(results));
 })();
