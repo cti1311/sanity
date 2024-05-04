@@ -16,26 +16,12 @@ var Table = require("cli-table");
 
 require("dotenv").config();
 
-const express = require("express");
-const app = express();
-
-app.use(express.urlencoded({ extended: false }));
-
-app.use("/", require("../routes/index"));
-
 (async () => {
-  let server;
-  await new Promise((res) => {
-    server = app.listen(process.env.PORT, () => {
-      console.log("Local server started!!!");
-      res();
-      return this
-    });
-  });
+  
   let args = process.argv.slice(2);
   if (args.length == 0) throw new Error("No argument found");
 
-  let concurrency = 10;
+  let concurrency = 1;
 
   let time = Date.now();
 
@@ -96,20 +82,16 @@ app.use("/", require("../routes/index"));
       default:
         throw new Error(`Test Data for mode "${mode}" not present`);
     }
-    // if (tests.length == concurrency - 1 ) {
-    //   await Promise.all(tests);
-    //   tests = [];
-    // }
+    if (tests.length == concurrency - 1 ) {
+      await Promise.all(tests);
+      tests = [];
+    }
   }
   await Promise.all(tests);
 
   bar1.stop();
-  try{
-    await server.close()
-  }catch{
-
-  }
-  // console.log("Total time taken: " + String(Date.now() - time) + "ms");
+ 
+  console.log("Total time taken: " + String(Date.now() - time) + "ms");
   let tables = [];
   for (test of results) {
     let status;

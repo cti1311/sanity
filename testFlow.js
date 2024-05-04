@@ -20,6 +20,7 @@ async function startTest({url,mode, flow, bankcode, payload, response} ) {
   const page = await context.newPage();
 
   await page.goto(url);
+  // console.log(browser.cpuUsage())
   await page.route("**/*", (route) => {
     return route.request().resourceType() === "image" ||
       route.request().resourceType() === "stylesheet"
@@ -61,7 +62,7 @@ module.exports = async (testData, mode) => {
     report.totalTests++;
   }
 
-  let concurrency = 10;
+  let concurrency = 1;
   let tests = [];
   for (let flow in testData) {
     for (let data of testData[flow]) {
