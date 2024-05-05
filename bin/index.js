@@ -7,7 +7,8 @@ const nbData = require("../testData/nbData");
 const upiData = require("../testData/upiData");
 const ccData = require("../testData/ccData");
 const dcData = require("../testData/dcData");
-
+const fs = require('fs');
+const path = require('path');
 let chalk = require("chalk");
 const cliProgress = require("cli-progress");
 const colors = require("ansi-colors");
@@ -130,7 +131,8 @@ require("dotenv").config();
   });
 
   table.push(...tables);
-
+  
+  fs.writeFileSync(path.join(__dirname,'../result/cli.json'),JSON.stringify(results))
   console.log(table.toString());
   console.log(JSON.stringify(results));
 })();

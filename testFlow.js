@@ -1,10 +1,11 @@
 const { chromium } = require("playwright");
 require("dotenv").config();
+const config = require('./config.js')
 
 const pg = require("./paymentGateway/index");
 
 function getPaymentUrl(payload) {
-  let baseUrl = `http://localhost:${process.env.PORT}/payment/initiate?`;
+  let baseUrl = `http://localhost:${config.server.port}/payment/initiate?`;
   for (let key in payload) {
     baseUrl += `${key}=${payload[key]}&`;
   }
