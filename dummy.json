@@ -1,0 +1,40 @@
+[
+  {
+    "paymentMode": "CC",
+    "timeTaken": 16774,
+    "testPassed": 2,
+    "totalTests": 2,
+    "averageTimePerTest": 8387,
+    "tests": {
+      "seamless": [
+        {
+          "status": true,
+          "timeTaken": 7291,
+          "steps": [
+            { "step": "PG page loaded", "status": true, "logs": "" },
+            { "step": "OTP submitted", "status": true, "logs": "" },
+            { "step": "Response validated", "status": true, "logs": "" }
+          ],
+          "testName": "Mastercard"
+        }
+      ],
+      "nonseamless": [
+        {
+          "status": true,
+          "timeTaken": 9483,
+          "steps": [
+            { "step": "UPI loader page loaded", "status": true, "logs": "" },
+            { "step": "Credentials submitted", "status": true, "logs": "" },
+            { "step": "Credentials submitted", "status": true, "logs": "" },
+            { "step": "Credentials submitted", "status": true, "logs": "" },
+            { "step": "Credentials submitted", "status": true, "logs": "" },
+            { "step": "PG page loaded", "status": true, "logs": "" },
+            { "step": "OTP submitted", "status": true, "logs": "" },
+            { "step": "Response validated", "status": true, "logs": "" }
+          ],
+          "testName": "Mastercard"
+        }
+      ]
+    }
+  }
+]

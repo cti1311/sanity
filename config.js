@@ -4,6 +4,6 @@ module.exports = {
     },
     env: "cli",
     runner: {
-        concurrency: 10
+        concurrency: 1
     }
 }
