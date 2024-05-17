@@ -4,6 +4,13 @@ module.exports = {
     },
     env: "cli",
     runner: {
-        concurrency: 1
+        concurrency: 10
+    },
+    payu: {
+        creds: {
+            key: "Qyt13U",
+            salt: "ysDxHhbEmjk0qMnvBVhgZPjxgf3gDGyc"
+        },
+        env: "TEST"
     }
 }

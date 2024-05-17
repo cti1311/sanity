@@ -81,7 +81,7 @@ module.exports = async (testData, mode) =>
       report.totalTests++;
     }
 
-    let concurrency = 10;
+    let concurrency = config.runner.concurrency;
     let tests = [];
     for (let flow in testData) {
       for (let data of testData[flow]) {

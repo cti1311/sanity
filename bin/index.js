@@ -2,26 +2,41 @@
 
 let runner = require("../testFlow");
 
+let apiRunner = require("../testAPI");
+
 const cashData = require("../testData/cashData");
 const nbData = require("../testData/nbData");
 const upiData = require("../testData/upiData");
 const ccData = require("../testData/ccData");
 const dcData = require("../testData/dcData");
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 let chalk = require("chalk");
 const cliProgress = require("cli-progress");
 const colors = require("ansi-colors");
 // create a new progress bar instance and use shades_classic theme
 var Table = require("cli-table");
-const pLimit = require('p-limit');
+const pLimit = require("p-limit");
 const config = require("../config");
+const tokenizationData = require("../testData/tokenizationData");
 require("dotenv").config();
+
+const express = require('express');
+const app = express();
 
 const limit = pLimit(config.runner.concurrency ?? 1);
 
 (async () => {
-  
+  let server;
+  if (config.env != "cli") {
+    await new Promise((res) => {
+      server = app.listen(process.env.PORT, () => {
+        console.log("Local server started!!!");
+        res();
+        return this;
+      });
+    });
+  }
   let args = process.argv.slice(2);
   if (args.length == 0) throw new Error("No argument found");
 
@@ -46,42 +61,62 @@ const limit = pLimit(config.runner.concurrency ?? 1);
     switch (mode) {
       case "cc":
         tests.push(
-          limit(()=>runner(ccData, "CC").then((res) => {
-            results.push(res);
-            bar1.increment(1);
-          }))
+          limit(() =>
+            runner(ccData, "CC").then((res) => {
+              results.push(res);
+              bar1.increment(1);
+            })
+          )
         );
         break;
       case "dc":
         tests.push(
-          limit(()=>runner(dcData, "DC").then((res) => {
-            results.push(res);
-            bar1.increment(1);
-          }))
+          limit(() =>
+            runner(dcData, "DC").then((res) => {
+              results.push(res);
+              bar1.increment(1);
+            })
+          )
         );
         break;
       case "cash":
         tests.push(
-          limit(()=>runner(cashData, "CASH").then((res) => {
-            results.push(res);
-            bar1.increment(1);
-          }))
+          limit(() =>
+            runner(cashData, "CASH").then((res) => {
+              results.push(res);
+              bar1.increment(1);
+            })
+          )
         );
         break;
       case "nb":
         tests.push(
-          limit(()=>runner(nbData, "NB").then((res) => {
-            results.push(res);
-            bar1.increment(1);
-          }))
+          limit(() =>
+            runner(nbData, "NB").then((res) => {
+              results.push(res);
+              bar1.increment(1);
+            })
+          )
         );
         break;
       case "upi":
         tests.push(
-          limit(()=>runner(upiData, "UPI").then((res) => {
-            results.push(res);
-            bar1.increment(1);
-          }))
+          limit(() =>
+            runner(upiData, "UPI").then((res) => {
+              results.push(res);
+              bar1.increment(1);
+            })
+          )
+        );
+        break;
+      case "tokenization":
+        tests.push(
+          limit(() =>
+            apiRunner(tokenizationData, "Tokenization").then((res) => {
+              results.push(res);
+              bar1.increment(1);
+            })
+          )
         );
         break;
       default:
@@ -89,9 +124,13 @@ const limit = pLimit(config.runner.concurrency ?? 1);
     }
   }
   await Promise.all(tests);
-
+  if (config.env != "cli") {
+    try {
+      await server.close();
+    } catch {}
+  }
   bar1.stop();
- 
+
   console.log("Total time taken: " + String(Date.now() - time) + "ms");
   let tables = [];
   for (test of results) {
@@ -131,8 +170,11 @@ const limit = pLimit(config.runner.concurrency ?? 1);
   });
 
   table.push(...tables);
-  
-  fs.writeFileSync(path.join(__dirname,'../result/cli.json'),JSON.stringify(results))
+
+  fs.writeFileSync(
+    path.join(__dirname, "../result/cli.json"),
+    JSON.stringify(results)
+  );
   console.log(table.toString());
   console.log(JSON.stringify(results));
 })();
