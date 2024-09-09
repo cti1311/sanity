@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const config = require("./config.js")
-const cors = requrie('cors')
+const cors = require('cors')
 app.use(cors())
 app.use(express.urlencoded({extended: false}))
 

@@ -1,6 +1,6 @@
 module.exports = {
     server:{
-        port: 3033
+        port: 80
     },
     env: "cli",
     runner: {

@@ -9,7 +9,7 @@ function getPaymentUrl(payload) {
   for (let key in payload) {
     baseUrl += `${key}=${payload[key]}&`;
   }
-  console.log(baseUrl);
+  // console.log(baseUrl);
   return baseUrl;
 }
 
@@ -81,7 +81,7 @@ module.exports = async (testData, mode) =>
       report.totalTests++;
     }
 
-    let concurrency = 10;
+    let concurrency = 1;
     let tests = [];
     for (let flow in testData) {
       for (let data of testData[flow]) {

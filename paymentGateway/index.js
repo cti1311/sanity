@@ -56,7 +56,7 @@ module.exports = async ({
   // Check the existing step status and continue with resposne validation
   if (result.getResult().status) {
     try {
-      await page.waitForURL("http://localhost:*/payment/response", {
+      await page.waitForURL("http://localhost/payment/response", {
         timeout: 45000,
       });
       let pgResposne = await page.locator("body > pre").textContent();
