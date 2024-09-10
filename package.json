@@ -29,7 +29,8 @@
     "p-limit": "^2.3.0",
     "payu-websdk": "^1.0.0",
     "progress": "^2.0.3",
-    "validate.js": "^0.13.1"
+    "validate.js": "^0.13.1",
+    "node-cache": "^5.1.2"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.1",

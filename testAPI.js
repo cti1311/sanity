@@ -35,7 +35,7 @@ async function startTest({ mode, flow, bankcode, payload, response }) {
     }
   );
   if (typeof data == "object")
-    result.addStep("Response resceived", true, String(JSON.stringify(data)));
+    result.addStep("Response received", true, String(JSON.stringify(data)));
   else {
     result.addStep("Response validated", false, String(data));
     return result.getResult();
@@ -51,26 +51,6 @@ async function startTest({ mode, flow, bankcode, payload, response }) {
   return result.getResult();
 }
 
-// console.log(
-//   startTest({
-//     payload: {
-//       command: "save_payment_instrument",
-//       var1: user_credentials,
-//       var2: "test",
-//       var3: "CC",
-//       var4: "CC",
-//       var5: "test",
-//       var6: "5123456789012346",
-//       var7: "05",
-//       var8: "2025",
-//     },
-//     response: {
-//       status: { numericality: { equalTo: 1 } },
-//       cardToken: { presence: { allowEmpty: false } },
-//       network_token: { presence: { allowEmpty: false } },
-//     },
-//   })
-// );
 
 module.exports = async (testData, mode) =>
   new Promise(async (res) => {

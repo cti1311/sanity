@@ -89,7 +89,7 @@ module.exports = async (testData, mode) =>
         tests.push(
           initTest({
             payload: data.payload,
-            resposne: data.response,
+            response: data.response,
             mode: mode,
             flow: flow,
             bankcode: data.testName,
