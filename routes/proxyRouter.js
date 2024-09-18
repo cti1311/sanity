@@ -1,7 +1,6 @@
 const config = require('../config.js')
 
 const router = require('express').Router()
-const qs = require('qs')
 
 const axios = require('axios')
 const url = require('node:url');
