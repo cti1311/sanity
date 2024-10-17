@@ -50,10 +50,10 @@ async function decryptForICICISI(request) {
 }
 
 route.post("/mandateNotify", async (req, res, next) => {
-    var response, requestBody;
+    let response, requestBody;
     requestBody = req.body;
     console.log(requestBody)
-    var receivedParams = JSON.parse(await decryptForICICISI(requestBody));
+    let receivedParams = JSON.parse(await decryptForICICISI(requestBody));
     let responseParams = { response: "0", merchantId: receivedParams.merchantId, subMerchantId: receivedParams.subMerchantId, terminalId: receivedParams.terminalId, success: "true", message: "Transaction Successful", merchantTranId: "21293899416pre" + Math.floor(Math.random()*10000000), BankRRN: Math.floor(Math.random()*1000000000) }
     response = await encryptForICICISI(responseParams);
     console.log(response)
