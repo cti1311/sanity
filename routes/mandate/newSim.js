@@ -49,6 +49,17 @@ async function decryptForICICISI(request) {
     return decryptedText;
 }
 
+route.post("/mandateNotify", async (req, res, next) => {
+    var response, requestBody;
+    requestBody = req.body;
+    console.log(requestBody)
+    var receivedParams = JSON.parse(await decryptForICICISI(requestBody));
+    let responseParams = { response: "0", merchantId: receivedParams.merchantId, subMerchantId: receivedParams.subMerchantId, terminalId: receivedParams.terminalId, success: "true", message: "Transaction Successful", merchantTranId: "21293899416pre" + Math.floor(Math.random()*10000000), BankRRN: Math.floor(Math.random()*1000000000) }
+    response = await encryptForICICISI(responseParams);
+    console.log(response)
+    res.status(200).send(response);
+})
+
 route.post("/", async (req, res, next) => {
     var response, requestBody, result, responseParams;
     requestBody = req.body;
