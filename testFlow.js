@@ -1,6 +1,7 @@
 const { chromium } = require("playwright");
 require("dotenv").config();
 const config = require("./config.js");
+const log = require("./logger.js")
 
 const pg = require("./paymentGateway/index");
 
@@ -15,7 +16,7 @@ function getPaymentUrl(payload) {
 
 async function startTest({ url, mode, flow, bankcode, payload, response }) {
   const browser = await chromium.launch({
-    headless: config.runner.chromium.headless || false,
+    headless: config.runner?.chromium?.headless || true,
   });
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -106,5 +107,6 @@ module.exports = async (testData, mode) =>
     if (report.totalTests > 0) {
       report.averageTimePerTest = report.timeTaken / report.totalTests;
     }
+    log.info(JSON.stringify(report))
     res(report);
   });
