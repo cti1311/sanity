@@ -61,7 +61,7 @@ route.post("/mandateNotify", async (req, res, next) => {
 })
 
 route.post("/", async (req, res, next) => {
-    var response, requestBody, result, responseParams;
+    try{var response, requestBody, result, responseParams;
     requestBody = req.body;
     console.log(requestBody)
     var receivedParams = JSON.parse(await decryptForICICISI(requestBody));
@@ -106,7 +106,9 @@ route.post("/", async (req, res, next) => {
     //     }
     //     upi.returnCallback(request, res, next);
     // }
-
+    } catch (error) {
+    	res.send(error);
+    }
 })
 
 module.exports = route;
