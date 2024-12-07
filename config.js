@@ -4,6 +4,9 @@ module.exports = {
     },
     env: "cli",
     runner: {
-        concurrency: 1
+        concurrency: 15,
+        chromium: {
+            headless: true
+        }
     }
 }

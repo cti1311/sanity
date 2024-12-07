@@ -5,17 +5,8 @@ let checkout = require("./checkout/index");
 let cardPg = require("./cards/index");
 let testResult = require("../utils/testResult");
 
-module.exports = async ({
-  page,
-  mode,
-  context,
-  flow,
-  bankcode,
-  payload,
-  response,
-}) => {
+module.exports = async ({page, mode, context, flow, bankcode, payload, response}) => {
   let result = testResult();
-  
   result.startTimer();
   // // console.log(mode);
   if (flow == "nonseamless") {
@@ -60,11 +51,13 @@ module.exports = async ({
         timeout: 45000,
       });
       let pgResposne = await page.locator("body > pre").textContent();
+      console.log({pgResposne})
       let rs = ["Response validated", true, ""];
-      pgResposne = JSON.stringify(pgResposne);
+      pgResposne = JSON.parse(pgResposne);
       for (let property in response) {
-        if (payload[property] != pgResposne[property]) {
+        if (response[property] != pgResposne[property]) {
           rs[1] = false;
+          rs[2] = `Expected value of ${property} was ${response[property]} but received ${pgResposne[property]}}`
           break;
         }
       }

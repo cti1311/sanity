@@ -51,7 +51,6 @@ module.exports = async function* (page, context) {
   }
 
   try {
-    
     await page.getByRole('button', { name: 'Simulate Success Response' }).click({
       timeout: 5000,
     });

@@ -9,13 +9,13 @@ function getPaymentUrl(payload) {
   for (let key in payload) {
     baseUrl += `${key}=${payload[key]}&`;
   }
-  // console.log(baseUrl);
+  console.log(baseUrl);
   return baseUrl;
 }
 
 async function startTest({ url, mode, flow, bankcode, payload, response }) {
   const browser = await chromium.launch({
-    headless: true,
+    headless: config.runner.chromium.headless || false,
   });
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -89,7 +89,7 @@ module.exports = async (testData, mode) =>
         tests.push(
           initTest({
             payload: data.payload,
-            resposne: data.response,
+            response: data.response,
             mode: mode,
             flow: flow,
             bankcode: data.testName,

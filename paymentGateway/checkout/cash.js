@@ -36,7 +36,7 @@ module.exports =  async function* ({page, bankcode}) {
   }
 
   try {
-    await page.getByRole('button', { name: 'PROCEED' }).click({
+    await page.getByTestId(`item-${bankcode}`).getByRole('button', { name: 'PROCEED',  }).click({
       timeout: 5000,
     });
     yield ["Credentials submitted", true, ""];
