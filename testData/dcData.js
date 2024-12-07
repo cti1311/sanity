@@ -3,7 +3,7 @@ module.exports = {
     {
       testName: "VISA",
       payload: {
-        ccnum: "4111111111111111",
+        ccnum: "4594538050639999",
         ccname: "Kshitij Tomar",
         ccvv: "123",
         ccexpmon: "05",
@@ -12,7 +12,20 @@ module.exports = {
       response: {
         status: "success",
         mode: "DC",
-        bankcode: "DC",
+      },
+    },
+    {
+      testName: "Mastercard",
+      payload: {
+        ccnum: "5118700000000003",
+        ccname: "Kshitij Tomar",
+        ccvv: "123",
+        ccexpmon: "05",
+        ccexpyr: "2025"
+      },
+      response: {
+        status: "success",
+        mode: "DC",
       },
     }
   ],
@@ -22,7 +35,7 @@ module.exports = {
       payload: {
         bankcode: "VISA",
         pg: "DC",
-        ccnum: "4111111111111111",
+        ccnum: "4594538050639999",
         ccname: "Kshitij Tomar",
         ccvv: "123",
         ccexpmon: "05",
@@ -31,7 +44,22 @@ module.exports = {
       response: {
         status: "success",
         mode: "DC",
-        bankcode: "DC",
+      },
+    },
+    {
+      testName: "Mastercard",
+      payload: {
+        bankcode: "MAST",
+        pg: "DC",
+        ccnum: "5118700000000003",
+        ccname: "Kshitij Tomar",
+        ccvv: "123",
+        ccexpmon: "05",
+        ccexpyr: "2025"
+      },
+      response: {
+        status: "success",
+        mode: "DC",
       },
     }
   ],

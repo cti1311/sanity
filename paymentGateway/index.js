@@ -57,7 +57,7 @@ module.exports = async ({page, mode, context, flow, bankcode, payload, response}
       for (let property in response) {
         if (response[property] != pgResposne[property]) {
           rs[1] = false;
-          rs[2] = `Expected value of ${property} was ${response[property]} but received ${pgResposne[property]}}`
+          rs[2] = `Expected value of ${property} was ${response[property]} but received ${pgResposne[property]}`
           break;
         }
       }
