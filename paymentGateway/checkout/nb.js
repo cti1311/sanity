@@ -5,9 +5,9 @@ module.exports =  async function* ({page, bankcode}) {
     await page.waitForURL(PG_URL, {
       timeout: 10000,
     });
-    yield ["Checkout page loaded ( L1 ) page loaded", true, ""];
+    yield ["Checkout page loaded ( L1 )", true, ""];
   } catch (e) {
-    yield ["Checkout page loaded ( L1 ) page loaded", false, String(e)];
+    yield ["Checkout page loaded ( L1 )", false, String(e)];
     return;
   }
 

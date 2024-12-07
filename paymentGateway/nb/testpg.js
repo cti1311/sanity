@@ -44,9 +44,9 @@ module.exports = async function* (page, context) {
       timeout: 30000
     })
     await page.waitForResponse('**/jquery.min.js');
-    yield ["Simulated page loaded", true, ""];
+    yield ["Simulator page loaded", true, ""];
   } catch (e) {
-    yield ["Simulated page loaded", false, String(e)];
+    yield ["Simulator page loaded", false, String(e)];
     return;
   }
 

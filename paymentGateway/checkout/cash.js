@@ -7,9 +7,9 @@ module.exports =  async function* ({page, bankcode}) {
     await page.waitForURL(PG_URL, {
       timeout: 10000,
     });
-    yield ["UPI loader page loaded", true, ""];
+    yield ["Checkout page loaded ( L1 )", true, ""];
   } catch (e) {
-    yield ["UPI loader page loaded", false, String(e)];
+    yield ["Checkout page loaded ( L1 )", false, String(e)];
     return;
   }
 
@@ -19,9 +19,9 @@ module.exports =  async function* ({page, bankcode}) {
       .click({
         timeout: 5000,
       });
-    yield ["Credentials submitted", true, ""];
+    yield ["Clicked procced button", true, ""];
   } catch (e) {
-    yield ["Credentials submitted", false, String(e)];
+    yield ["Clicked procced button", false, String(e)];
     return
   }
 
@@ -29,9 +29,9 @@ module.exports =  async function* ({page, bankcode}) {
     await page.getByTestId(`item-${bankcode}`).click({
       timeout: 5000,
     });
-    yield ["Wallet selected", true, ""];
+    yield ["Selected ${bankcode} from the Wallet list", true, ""];
   } catch (e) {
-    yield ["Wallet selected", false, String(e)];
+    yield ["Selected ${bankcode} from the Wallet list", false, String(e)];
     return
   }
 
@@ -39,9 +39,9 @@ module.exports =  async function* ({page, bankcode}) {
     await page.getByTestId(`item-${bankcode}`).getByRole('button', { name: 'PROCEED',  }).click({
       timeout: 5000,
     });
-    yield ["Credentials submitted", true, ""];
+    yield ["Clicked procced button", true, ""];
   } catch (e) {
-    yield ["Credentials submitted", false, String(e)];
+    yield ["Clicked procced button", false, String(e)];
     return
   }
 }

@@ -19,9 +19,9 @@ module.exports = async function* (page, context) {
     await page.locator('//*[@id="app"]/div[1]/div[1]/div[3]/p/a').click({
       timeout: 1000,
     });
-    yield ["Credentials submitted", true, ""];
+    yield ["Clicked on simulate button", true, ""];
   } catch (e) {
-    yield ["Credentials submitted", false, String(e)];
+    yield ["Clicked on simulate button", false, String(e)];
     return;
   }
 

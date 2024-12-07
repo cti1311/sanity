@@ -14,9 +14,9 @@ module.exports = async function* ({ page, bankcode }) {
         timeout: 3000,
       });
     } catch {}
-    yield ["Checkout page loaded ( L1 ) page loaded", true, ""];
+    yield ["Checkout page loaded ( L1 )", true, ""];
   } catch (e) {
-    yield ["Checkout page loaded ( L1 ) page loaded", false, String(e)];
+    yield ["Checkout page loaded ( L1 )", false, String(e)];
     return;
   }
 
@@ -24,9 +24,9 @@ module.exports = async function* ({ page, bankcode }) {
     await page.getByText("UPI", { exact: true }).click({
       timeout: 5000,
     });
-    yield ["UPI Checkout page loaded ( L2 )", true, ""];
+    yield ["Clicked procced button", true, ""];
   } catch (e) {
-    yield ["UPI Checkout page loaded ( L2 )", false, String(e)];
+    yield ["Clicked procced button", false, String(e)];
     return;
   }
 
@@ -34,9 +34,9 @@ module.exports = async function* ({ page, bankcode }) {
     await page.locator("#paymentRightBar").getByText("Enter Any UPI ID").click({
       timeout: 5000,
     });
-    yield ["UPI Checkout page loaded ( L2 )", true, ""];
+    yield ["Clicked procced button", true, ""];
   } catch (e) {
-    yield ["UPI Checkout page loaded ( L2 )", false, String(e)];
+    yield ["Clicked procced button", false, String(e)];
     return;
   }
 
@@ -44,9 +44,9 @@ module.exports = async function* ({ page, bankcode }) {
     await page.getByPlaceholder("Enter UPI ID").fill("9999999999@upi", {
       timeout: 5000,
     });
-    yield ["VPA entered submitted", true, ""];
+    yield ["VPA submitted", true, ""];
   } catch (e) {
-    yield ["VPA entered submitted", false, String(e)];
+    yield ["VPA submitted", false, String(e)];
     return;
   }
 
@@ -54,9 +54,9 @@ module.exports = async function* ({ page, bankcode }) {
     await page.getByRole("button", { name: "Verify" }).click({
       timeout: 5000,
     });
-    yield ["UPI Checkout page loaded ( L2 )", true, ""];
+    yield ["VPA validated", true, ""];
   } catch (e) {
-    yield ["UPI Checkout page loaded ( L2 )", false, String(e)];
+    yield ["VPA validated", false, String(e)];
     return;
   }
 
@@ -64,9 +64,9 @@ module.exports = async function* ({ page, bankcode }) {
     await page.getByRole("button", { name: "PROCEED" }).click({
       timeout: 5000,
     });
-    yield ["UPI Checkout page loaded ( L2 )", true, ""];
+    yield ["Clicked procced button", true, ""];
   } catch (e) {
-    yield ["UPI Checkout page loaded ( L2 )", false, String(e)];
+    yield ["Clicked procced button", false, String(e)];
     return;
   }
 };

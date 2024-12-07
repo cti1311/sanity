@@ -5,9 +5,9 @@ module.exports =  async function* ({page, bankcode, payload}) {
     await page.waitForURL(PG_URL, {
       timeout: 10000,
     });
-    yield ["UPI loader page loaded", true, ""];
+    yield ["Checkout page loaded ( L1 )", true, ""];
   } catch (e) {
-    yield ["UPI loader page loaded", false, String(e)];
+    yield ["Checkout page loaded ( L1 )", false, String(e)];
     return;
   }
 
@@ -17,9 +17,9 @@ module.exports =  async function* ({page, bankcode, payload}) {
       .click({
         timeout: 5000,
       });
-    yield ["Credentials submitted", true, ""];
+    yield ["Cards Checkout page loaded ( L2 )", true, ""];
   } catch (e) {
-    yield ["Credentials submitted", false, String(e)];
+    yield ["Cards Checkout page loaded ( L2 )", false, String(e)];
     return
   }
   
@@ -36,9 +36,9 @@ module.exports =  async function* ({page, bankcode, payload}) {
     await page.getByTestId('cardOwnerName').fill(payload.ccname,{
       timeout: 5000,
     });
-    yield ["Credentials submitted", true, ""];
+    yield ["Card information filled", true, ""];
   } catch (e) {
-    yield ["Credentials submitted", false, String(e)];
+    yield ["Card information filled", false, String(e)];
     return
   }
 
@@ -47,9 +47,9 @@ module.exports =  async function* ({page, bankcode, payload}) {
     await page.getByRole('button', { name: 'PROCEED' }).click({
       timeout: 5000,
     });
-    yield ["Credentials submitted", true, ""];
+    yield ["Clicked procced button", true, ""];
   } catch (e) {
-    yield ["Credentials submitted", false, String(e)];
+    yield ["Clicked procced button", false, String(e)];
     return
   }
 
@@ -57,9 +57,9 @@ module.exports =  async function* ({page, bankcode, payload}) {
     await page.getByTestId('closeWithoutSave').click({
       timeout: 5000,
     });
-    yield ["Credentials submitted", true, ""];
+    yield ["Checking for tokenization nudge", true, ""];
   } catch (e) {
-    yield ["Credentials submitted", true, String(e)];
+    yield ["Checking for tokenization nudge", true, ""];
     return
   }
 }

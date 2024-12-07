@@ -52,7 +52,7 @@ module.exports = async ({page, mode, context, flow, bankcode, payload, response}
       });
       let pgResposne = await page.locator("body > pre").textContent();
       console.log({pgResposne})
-      let rs = ["Response validated", true, ""];
+      let rs = ["Transaction Response validated", true, ""];
       pgResposne = JSON.parse(pgResposne);
       for (let property in response) {
         if (response[property] != pgResposne[property]) {
@@ -64,7 +64,7 @@ module.exports = async ({page, mode, context, flow, bankcode, payload, response}
       result.addStep(...rs);
     } catch(e){
       // console.log(e)
-      result.addStep("Response validated", false, String(e));
+      result.addStep("Transaction Response validated", false, String(e));
     }
   }
 
