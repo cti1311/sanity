@@ -3,6 +3,7 @@ let nbPG = require("./nb/index");
 let upiPG = require("./upi/index");
 let checkout = require("./checkout/index");
 let cardPg = require("./cards/index");
+let emiPg = require('./emi/index')
 let testResult = require("../utils/testResult");
 
 module.exports = async ({page, mode, context, flow, bankcode, payload, response}) => {
@@ -36,6 +37,9 @@ module.exports = async ({page, mode, context, flow, bankcode, payload, response}
       case "UPI":
         pgGen = upiPG();
         break;
+      case "EMI":
+          pgGen = emiPg();
+          break;
     }
     pgGen = pgGen(page, context);
     for await (let itr of pgGen) {

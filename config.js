@@ -6,7 +6,7 @@ module.exports = {
     runner: {
         concurrency: 1,
         chromium: {
-            headless: true
+            headless: false
         }
     }
 }

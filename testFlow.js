@@ -16,7 +16,7 @@ function getPaymentUrl(payload) {
 
 async function startTest({ url, mode, flow, bankcode, payload, response }) {
   const browser = await chromium.launch({
-    headless: config.runner?.chromium?.headless || true,
+    headless: config.runner?.chromium?.headless || false,
   });
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -93,7 +93,7 @@ module.exports = async (testData, mode) =>
             response: data.response,
             mode: mode,
             flow: flow,
-            bankcode: data.testName,
+            bankcode: data.payload?.bankcode || data.testName,
           })
         );
         if (tests.length == concurrency) {

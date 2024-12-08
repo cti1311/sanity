@@ -7,6 +7,7 @@ const nbData = require("../testData/nbData");
 const upiData = require("../testData/upiData");
 const ccData = require("../testData/ccData");
 const dcData = require("../testData/dcData");
+const emiData = require("../testData/emiData");
 const fs = require('fs');
 const path = require('path');
 let chalk = require("chalk");
@@ -84,6 +85,14 @@ const limit = pLimit(config.runner.concurrency ?? 1);
           }))
         );
         break;
+      case "emi":
+          tests.push(
+            limit(()=>runner(emiData, "EMI").then((res) => {
+              results.push(res);
+              bar1.increment(1);
+            }))
+          );
+          break;
       default:
         throw new Error(`Test Data for mode "${mode}" not present`);
     }

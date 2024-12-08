@@ -2,6 +2,7 @@ const nbGen = require("./nb");
 const upiGen = require("./upi");
 const cashGen = require("./cash");
 const cardsGen = require("./cards");
+const emiGen = require("./emi")
 
 module.exports = (mode) => {
   switch (mode) {
@@ -13,7 +14,9 @@ module.exports = (mode) => {
       return upiGen;
     case "CASH":
       return cashGen;
-      case "NB":
+    case "NB":
         return nbGen;
+    case "EMI":
+      return emiGen;
   }
 };
