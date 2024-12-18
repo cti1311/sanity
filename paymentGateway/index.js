@@ -5,6 +5,7 @@ let checkout = require("./checkout/index");
 let cardPg = require("./cards/index");
 let emiPg = require('./emi/index')
 let testResult = require("../utils/testResult");
+const config = require("../config.js");
 
 module.exports = async ({page, mode, context, flow, bankcode, payload, response}) => {
   let result = testResult();
@@ -48,10 +49,10 @@ module.exports = async ({page, mode, context, flow, bankcode, payload, response}
   }
 
   // // console.log(result.getResult());
-  // Check the existing step status and continue with resposne validation
+  // Check the existing step status and continue with response validation
   if (result.getResult().status) {
     try {
-      await page.waitForURL("http://localhost/payment/response", {
+      await page.waitForURL(`http://localhost:${config.server.port}/payment/response`, {
         timeout: 45000,
       });
       let pgResposne = await page.locator("body > pre").textContent();
