@@ -1,10 +1,10 @@
 module.exports = {
     server:{
-        port: 80
+        port: 3000
     },
     env: "cli",
     runner: {
-        concurrency: 100,
+        concurrency: 1,
         chromium: {
             headless: true
         }
